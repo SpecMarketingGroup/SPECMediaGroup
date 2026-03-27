@@ -238,33 +238,33 @@
           <div class="form-row">
             <div class="form-group">
               <label>First Name *</label>
-              <input type="text" placeholder="Gabriel" required/>
+              <input type="text" name="first_name" placeholder="Gabriel" required/>
             </div>
             <div class="form-group">
               <label>Last Name *</label>
-              <input type="text" placeholder="Lloyd" required/>
+              <input type="text" name="last_name" placeholder="Lloyd" required/>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>Email Address *</label>
-              <input type="email" placeholder="you@yourbusiness.com" required/>
+              <input type="email" name="email" placeholder="you@yourbusiness.com" required/>
             </div>
             <div class="form-group">
               <label>Phone Number</label>
-              <input type="tel" placeholder="(215) 000-0000"/>
+              <input type="tel" name="phone" placeholder="(215) 000-0000"/>
             </div>
           </div>
 
           <div class="form-group">
             <label>Business Name *</label>
-            <input type="text" placeholder="Your Business Name" required/>
+            <input type="text" name="business" placeholder="Your Business Name" required/>
           </div>
 
           <div class="form-group">
             <label>Service You're Interested In *</label>
-            <select required>
+            <select name="service" required>
               <option value="" disabled selected>Select a service...</option>
               <optgroup label="SPEC Media — Video">
                 <option>60-Second Promotional Video ($800)</option>
@@ -292,11 +292,11 @@
           <div class="form-row">
             <div class="form-group">
               <label>Preferred Shoot Date</label>
-              <input type="date"/>
+              <input type="date" name="shoot_date"/>
             </div>
             <div class="form-group">
               <label>Budget Range</label>
-              <select>
+              <select name="budget">
                 <option value="" disabled selected>Select a range...</option>
                 <option>Under $500</option>
                 <option>$500 – $1,000</option>
@@ -309,7 +309,7 @@
 
           <div class="form-group">
             <label>Tell Us About Your Project *</label>
-            <textarea placeholder="Describe your business, what you need, and any details that would help us understand your project..." required></textarea>
+            <textarea name="message" placeholder="Describe your business, what you need, and any details that would help us understand your project..." required></textarea>
           </div>
 
           <p class="form-note">*A non-refundable 50% deposit is required to secure your booking date. We'll follow up within 24 business hours to confirm availability and send your invoice. Submitting this form does not guarantee a booking date.</p>

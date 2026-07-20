@@ -1,1 +1,2 @@
-# SPECMediaGroup
+# SPEC Media Group
+specmg.com

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>About | SPEC Media Group</title>
+<title>Contact | SPEC Media Group</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet"/>
 <style>
   :root { --gold:#F5A800; --gold-light:#FFF8E7; --gold-dim:#c98a00; --black:#111111; --dark:#1a1a1a; --mid:#2d2d2d; --gray:#888888; --light:#f4f4f4; --white:#ffffff; }
@@ -26,78 +26,81 @@
   .nav-cta { background:var(--gold); color:var(--black); padding:10px 24px; font-size:0.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; display:inline-block; transition:background 0.2s; white-space:nowrap; }
   .nav-cta:hover { background:var(--gold-dim); color:var(--white); }
 
-  .page-hero { min-height:100vh; background:var(--dark); display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; padding-top:70px; }
+  /* HERO */
+  .page-hero { min-height:45vh; background:var(--dark); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 48px 80px; position:relative; overflow:hidden; }
+  .page-hero::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(245,168,0,0.03) 80px,rgba(245,168,0,0.03) 81px),repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(245,168,0,0.03) 80px,rgba(245,168,0,0.03) 81px); }
   .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--gold); }
-  .hero-left { padding:80px; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; }
-  .hero-right { position:relative; overflow:hidden; background:var(--mid); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; }
-  .hero-right::before { content:''; position:absolute; inset:0; background:linear-gradient(to right,var(--dark) 0%,transparent 30%); z-index:1; }
-  .hero-photo-placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; }
-  .hero-photo-placeholder span:first-child { font-size:5rem; }
-  .hero-photo-placeholder span:last-child { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--gray); }
-  .page-eyebrow { font-size:0.72rem; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:24px; opacity:0; animation:fadeUp 0.8s ease forwards 0.2s; }
-  .hero-left h1 { font-family:'Anton',sans-serif; font-size:clamp(3rem,5vw,5rem); line-height:0.95; letter-spacing:3px; color:var(--white); text-transform:uppercase; margin-bottom:32px; opacity:0; animation:fadeUp 0.8s ease forwards 0.4s; }
-  .hero-left h1 span { color:var(--gold); }
-  .hero-left p { font-size:1rem; font-weight:300; color:rgba(255,255,255,0.7); line-height:1.9; margin-bottom:40px; opacity:0; animation:fadeUp 0.8s ease forwards 0.6s; }
-  .hero-btns { display:flex; gap:16px; flex-wrap:wrap; opacity:0; animation:fadeUp 0.8s ease forwards 0.8s; }
-  .gold-corner-tl { position:absolute; top:24px; left:24px; width:40px; height:40px; border-left:3px solid var(--gold); border-top:3px solid var(--gold); z-index:2; }
-  .gold-corner-br { position:absolute; bottom:24px; right:24px; width:40px; height:40px; border-right:3px solid var(--gold); border-bottom:3px solid var(--gold); z-index:2; }
+  .hero-content { position:relative; z-index:2; max-width:700px; }
+  .page-eyebrow { font-size:0.72rem; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; opacity:0; animation:fadeUp 0.8s ease forwards 0.2s; }
+  .page-hero h1 { font-family:'Anton',sans-serif; font-size:clamp(3rem,7vw,6rem); line-height:0.95; letter-spacing:3px; color:var(--white); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:fadeUp 0.8s ease forwards 0.4s; }
+  .page-hero h1 span { color:var(--gold); }
+  .page-hero p { font-size:1.05rem; font-weight:300; color:rgba(255,255,255,0.65); line-height:1.8; max-width:560px; margin:0 auto; opacity:0; animation:fadeUp 0.8s ease forwards 0.6s; }
 
-  section { padding:100px 80px; }
-  .inner { max-width:1100px; margin:0 auto; }
-  .section-label { display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; padding:6px 16px; margin-bottom:20px; }
-  .section-label.gold { background:var(--gold); color:var(--black); }
-  .section-label.outline { border:1px solid var(--gold); color:var(--gold); }
-  .section-title { font-family:'Anton',sans-serif; font-size:clamp(2rem,4vw,3.2rem); letter-spacing:3px; text-transform:uppercase; line-height:1; margin-bottom:16px; }
-  .section-sub { font-size:1rem; font-weight:300; color:var(--gray); margin-bottom:56px; max-width:600px; }
+  /* CONTACT LAYOUT */
+  .contact-section { background:var(--black); padding:100px 80px; }
+  .contact-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:80px; align-items:start; }
 
-  .btn-gold { background:var(--gold); color:var(--black); padding:16px 36px; font-size:0.82rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; border:2px solid var(--gold); cursor:pointer; text-decoration:none; display:inline-block; transition:all 0.2s; }
-  .btn-gold:hover { background:transparent; color:var(--gold); }
-  .btn-outline { background:transparent; color:var(--white); padding:16px 36px; font-size:0.82rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; border:2px solid rgba(255,255,255,0.4); text-decoration:none; display:inline-block; transition:all 0.2s; }
-  .btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+  /* CONTACT INFO */
+  .contact-info h2 { font-family:'Anton',sans-serif; font-size:2rem; letter-spacing:3px; text-transform:uppercase; color:var(--white); line-height:1; margin-bottom:24px; }
+  .contact-info > p { font-size:0.98rem; font-weight:300; color:rgba(255,255,255,0.65); line-height:1.9; margin-bottom:40px; }
+  .contact-item { display:flex; gap:20px; align-items:flex-start; margin-bottom:32px; padding-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .contact-item:last-of-type { border-bottom:none; }
+  .contact-icon { width:48px; height:48px; background:rgba(245,168,0,0.1); border:1px solid rgba(245,168,0,0.3); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+  .contact-item-content h4 { font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+  .contact-item-content p { font-size:0.95rem; color:rgba(255,255,255,0.7); font-weight:300; line-height:1.6; }
+  .contact-item-content a { color:var(--white); text-decoration:none; transition:color 0.2s; }
+  .contact-item-content a:hover { color:var(--gold); }
+  .social-links { margin-top:40px; }
+  .social-links h4 { font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+  .social-link { display:inline-flex; align-items:center; gap:10px; padding:12px 20px; border:1px solid rgba(245,168,0,0.3); color:var(--white); text-decoration:none; font-size:0.82rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; transition:all 0.2s; margin-right:12px; margin-bottom:12px; }
+  .social-link:hover { background:rgba(245,168,0,0.1); border-color:var(--gold); color:var(--gold); }
 
-  /* STORY */
-  .story-section { background:var(--white); }
-  .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
-  .story-content h2 { font-family:'Anton',sans-serif; font-size:clamp(2rem,3vw,2.8rem); letter-spacing:3px; text-transform:uppercase; color:var(--black); line-height:1; margin-bottom:28px; }
-  .story-content h2 span { color:var(--gold); }
-  .story-content p { font-size:0.98rem; color:#444; line-height:1.9; margin-bottom:20px; font-weight:300; }
-  .story-aside { padding-top:8px; }
-  .spec-acronym { background:var(--black); padding:40px; margin-bottom:32px; }
-  .spec-acronym h4 { font-size:0.68rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
-  .spec-letter { display:flex; gap:16px; align-items:baseline; margin-bottom:12px; }
-  .spec-letter-char { font-family:'Anton',sans-serif; font-size:2rem; color:var(--gold); width:32px; flex-shrink:0; }
-  .spec-letter-word { font-size:0.92rem; color:var(--white); font-weight:300; }
-  .division-box { padding:32px; border:1px solid rgba(245,168,0,0.2); margin-bottom:16px; }
-  .division-box h4 { font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
-  .division-box p { font-size:0.88rem; color:#555; line-height:1.7; font-weight:300; }
+  /* CONTACT FORM */
+  .contact-form-wrap { background:var(--dark); padding:48px; border-top:3px solid var(--gold); }
+  .form-title { font-family:'Anton',sans-serif; font-size:1.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--white); margin-bottom:8px; }
+  .form-subtitle { font-size:0.88rem; color:var(--gray); font-weight:300; margin-bottom:36px; }
+  .form-group { margin-bottom:20px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+  .form-group label { display:block; font-size:0.68rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width:100%; background:var(--mid); border:1px solid rgba(255,255,255,0.1); color:var(--white);
+    padding:14px 16px; font-family:'Barlow',sans-serif; font-size:0.92rem; font-weight:300;
+    outline:none; transition:border-color 0.2s; appearance:none;
+  }
+  .form-group select { cursor:pointer; }
+  .form-group select option { background:var(--mid); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--gold); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.25); }
+  .form-group textarea { resize:vertical; min-height:140px; }
+  .form-note { font-size:0.78rem; color:var(--gray); font-style:italic; margin-bottom:24px; line-height:1.6; }
+  .form-submit { width:100%; background:var(--gold); color:var(--black); padding:18px 36px; font-family:'Barlow',sans-serif; font-size:0.88rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; border:2px solid var(--gold); cursor:pointer; transition:all 0.2s; }
+  .form-submit:hover { background:transparent; color:var(--gold); }
+  .form-success { display:none; background:rgba(245,168,0,0.1); border:1px solid var(--gold); padding:24px; text-align:center; }
+  .form-success h3 { font-family:'Anton',sans-serif; font-size:1.4rem; letter-spacing:2px; color:var(--gold); margin-bottom:8px; }
+  .form-success p { font-size:0.88rem; color:rgba(255,255,255,0.7); font-weight:300; }
 
-  /* CREDENTIALS */
-  .credentials-section { background:var(--dark); }
-  .credentials-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; }
-  .credential-card { background:var(--mid); padding:40px 28px; border-top:3px solid var(--gold); transition:background 0.2s; }
-  .credential-card:hover { background:#333; }
-  .credential-icon { font-size:2rem; margin-bottom:16px; }
-  .credential-card h3 { font-family:'Anton',sans-serif; font-size:1.1rem; letter-spacing:2px; text-transform:uppercase; color:var(--white); margin-bottom:8px; }
-  .credential-card p { font-size:0.84rem; color:rgba(255,255,255,0.5); line-height:1.7; font-weight:300; }
-  .credential-year { display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:2px; color:var(--gold); margin-top:12px; }
+  /* QUICK CONTACT STRIP */
+  .quick-strip { background:var(--gold); padding:48px 80px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; }
+  .quick-strip h3 { font-family:'Anton',sans-serif; font-size:1.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--black); }
+  .quick-strip p { color:rgba(0,0,0,0.6); font-size:0.95rem; font-weight:300; margin-top:4px; }
+  .quick-contacts { display:flex; gap:20px; flex-wrap:wrap; }
+  .quick-contact-btn { display:inline-flex; align-items:center; gap:10px; background:var(--black); color:var(--gold); padding:14px 24px; font-size:0.8rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:all 0.2s; border:2px solid var(--black); }
+  .quick-contact-btn:hover { background:transparent; color:var(--black); border-color:var(--black); }
 
-  /* VALUES */
-  .values-section { background:var(--white); }
-  .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
-  .value-card { padding:40px 32px; border-top:3px solid var(--gold); background:var(--light); }
-  .value-number { font-family:'Anton',sans-serif; font-size:3rem; color:var(--gold); line-height:1; margin-bottom:16px; }
-  .value-card h3 { font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--black); margin-bottom:12px; }
-  .value-card p { font-size:0.9rem; color:#555; line-height:1.8; font-weight:300; }
+  /* FAQ */
+  .faq-section { background:var(--dark); padding:100px 80px; }
+  .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .faq-item { background:var(--mid); padding:32px 28px; border-left:3px solid transparent; transition:border-color 0.2s; cursor:pointer; }
+  .faq-item:hover { border-left-color:var(--gold); }
+  .faq-item h4 { font-size:0.9rem; font-weight:700; color:var(--white); margin-bottom:12px; line-height:1.4; }
+  .faq-item p { font-size:0.86rem; color:rgba(255,255,255,0.6); font-weight:300; line-height:1.8; }
 
-  /* CTA */
-  .cta-banner { background:var(--gold); padding:80px; display:flex; align-items:center; justify-content:space-between; gap:48px; flex-wrap:wrap; }
-  .cta-banner h2 { font-family:'Anton',sans-serif; font-size:clamp(2rem,4vw,3rem); letter-spacing:3px; text-transform:uppercase; color:var(--black); line-height:1; }
-  .cta-banner p { color:rgba(0,0,0,0.6); font-size:1rem; margin-top:10px; font-weight:300; max-width:420px; }
-  .cta-btns { display:flex; gap:16px; flex-wrap:wrap; }
-  .btn-black { background:var(--black); color:var(--gold); padding:16px 36px; font-size:0.82rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; display:inline-block; border:2px solid var(--black); transition:all 0.2s; }
-  .btn-black:hover { background:transparent; color:var(--black); }
-  .btn-black-outline { background:transparent; color:var(--black); padding:16px 36px; font-size:0.82rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; border:2px solid var(--black); text-decoration:none; display:inline-block; transition:all 0.2s; }
-  .btn-black-outline:hover { background:var(--black); color:var(--gold); }
+  /* AREA */
+  .area-section { background:var(--black); padding:80px; text-align:center; border-top:2px solid rgba(245,168,0,0.2); }
+  .area-section h3 { font-family:'Anton',sans-serif; font-size:1.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--white); margin-bottom:16px; }
+  .area-section p { font-size:0.95rem; color:var(--gray); font-weight:300; margin-bottom:32px; }
+  .area-tags { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .area-tag { font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); padding:8px 16px; border:1px solid rgba(245,168,0,0.3); }
 
   footer { background:var(--black); border-top:2px solid var(--gold); padding:72px 80px 40px; }
   .footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:48px; margin-bottom:56px; }
@@ -123,20 +126,20 @@
   @media (max-width:900px) {
     nav { padding:0 24px; }
     .nav-links { display:none; }
-    section { padding:72px 32px; }
-    .page-hero { grid-template-columns:1fr; min-height:auto; }
-    .hero-left { padding:120px 32px 60px; }
-    .hero-right { min-height:300px; }
-    .story-grid { grid-template-columns:1fr; gap:40px; }
-    .credentials-grid { grid-template-columns:1fr 1fr; }
-    .values-grid { grid-template-columns:1fr; }
+    .page-hero { padding:120px 32px 60px; }
+    .contact-section { padding:72px 32px; }
+    .contact-grid { grid-template-columns:1fr; gap:48px; }
+    .form-row { grid-template-columns:1fr; }
+    .quick-strip { padding:48px 32px; flex-direction:column; }
+    .faq-section { padding:72px 32px; }
+    .faq-grid { grid-template-columns:1fr; }
+    .area-section { padding:60px 32px; }
     .footer-grid { grid-template-columns:1fr 1fr; }
-    .cta-banner { padding:60px 32px; flex-direction:column; }
     footer { padding:60px 32px 32px; }
   }
   @media (max-width:600px) {
-    .credentials-grid { grid-template-columns:1fr; }
     .footer-grid { grid-template-columns:1fr; }
+    .contact-form-wrap { padding:32px 24px; }
   }
 </style>
 </head>
@@ -160,159 +163,248 @@
         <a href="/packages" href="/SPECMediaGroup/packages.html">Packages</a>
       </div>
     </li>
-    <li><a href="/about" href="/SPECMediaGroup/about.html" class="active">About</a></li>
-    <li><a href="/contact" href="/SPECMediaGroup/contact.html">Contact</a></li>
+    <li><a href="/about" href="/SPECMediaGroup/about.html">About</a></li>
+    <li><a href="/contact" href="/SPECMediaGroup/contact.html" class="active">Contact</a></li>
   </ul>
   <a href="/contact" href="/SPECMediaGroup/contact.html" class="nav-cta">Book Now</a>
 </nav>
 
-<!-- HERO -->
 <div class="page-hero">
-  <div class="hero-left">
-    <p class="page-eyebrow">SPEC Media Group &nbsp;·&nbsp; Our Story</p>
-    <h1>Built On<br/><span>Passion.</span><br/>Driven By<br/>Results.</h1>
-    <p>SPEC Media Group is more than a creative company. We're a business partner that understands what it takes to grow — because we've built something from the ground up ourselves.</p>
-    <div class="hero-btns">
-      <a href="/contact" href="/SPECMediaGroup/contact.html" class="btn-gold">Work With Us</a>
-      <a href="/media-services" href="/SPECMediaGroup/media-services.html" class="btn-outline">Our Services</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div style="position:absolute;inset:0;background:var(--mid);display:flex;align-items:center;justify-content:center;"><span style="color:var(--gray);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;">Photo Coming Soon</span></div>
-    <div class="gold-corner-tl"></div>
-    <div class="gold-corner-br"></div>
+  <div class="hero-content">
+    <p class="page-eyebrow">SPEC Media Group &nbsp;·&nbsp; Let's Talk</p>
+    <h1>Get In <span>Touch</span></h1>
+    <p>Ready to book a shoot, ask about pricing, or just want to learn more? Fill out the form below and we'll get back to you within 24 business hours.</p>
   </div>
 </div>
 
-<!-- STORY -->
-<section class="story-section">
-  <div class="inner">
-    <div class="story-grid">
-      <div class="story-content">
-        <span class="section-label gold">Our Story</span>
-        <h2>A Philadelphia <span>Brand</span><br/>Built From The Ground Up</h2>
-        <p>SPEC Media Group was founded by E. Gabriel Lloyd, a Magna Cum Laude Business Marketing graduate from West Chester University with over five years of hands-on experience shooting, editing, and marketing for businesses across the Greater Philadelphia Area.</p>
-        <p>What started as a passion for photography and visual storytelling grew into a full-service creative and digital marketing company. Every project we take on is treated like it's our own brand on the line — because we know what it feels like to build something and need it to be represented the right way.</p>
-        <p>We work exclusively with businesses. That focus is intentional. B2B clients have different needs, different timelines, and different expectations than personal projects — and we've built SPEC around delivering at that level every time.</p>
-        <p>From a restaurant in Delaware County to a real estate agent in the Main Line, every client gets the same level of professionalism, preparation, and care that we'd want for our own brand.</p>
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="contact-grid">
+
+      <!-- INFO SIDE -->
+      <div class="contact-info">
+        <h2>Let's Start A<br/>Conversation</h2>
+        <p>Whether you're ready to book or just exploring your options — we're happy to talk through what makes sense for your business. No pressure, no sales pitch. Just an honest conversation about what we can do for you.</p>
+
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-item-content">
+            <h4>Phone</h4>
+            <p><a href="tel:2152007740">(215) 200-7740</a></p>
+            <p style="font-size:0.82rem;color:var(--gray);margin-top:4px;">Call or text — we respond to both</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-item-content">
+            <h4>Email</h4>
+            <p><a href="/cdn-cgi/l/email-protection#f99ed7959596809db98a899c9a949ed79a9694"><span class="__cf_email__" data-cfemail="50377e3c3c3f293410232035333d377e333f3d">[email&#160;protected]</span></a></p>
+            <p style="font-size:0.82rem;color:var(--gray);margin-top:4px;">Response within 24 business hours</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-content">
+            <h4>Service Area</h4>
+            <p>Greater Philadelphia Area</p>
+            <p style="font-size:0.82rem;color:var(--gray);margin-top:4px;">Delaware County, Chester County, Philadelphia & surrounding areas</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-item-content">
+            <h4>Response Time</h4>
+            <p>Within 24 Business Hours</p>
+            <p style="font-size:0.82rem;color:var(--gray);margin-top:4px;">Monday–Friday, 9am–6pm EST</p>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <h4>Follow Us</h4>
+          <a href="https://www.instagram.com/spec.dm" class="social-link">📸 Instagram</a>
+        </div>
       </div>
-      <div class="story-aside">
-        <div class="spec-acronym">
-          <h4>What SPEC Stands For</h4>
-          <div class="spec-letter"><span class="spec-letter-char">S</span><span class="spec-letter-word">Specialized</span></div>
-          <div class="spec-letter"><span class="spec-letter-char">P</span><span class="spec-letter-word">Photography</span></div>
-          <div class="spec-letter"><span class="spec-letter-char">E</span><span class="spec-letter-word">Entertainment</span></div>
-          <div class="spec-letter"><span class="spec-letter-char">C</span><span class="spec-letter-word">Commercial</span></div>
-        </div>
-        <div class="division-box">
-          <h4>SPEC Media</h4>
-          <p>Creative production — video, photography, real estate walkthroughs, and event coverage for businesses that need high-quality visual content.</p>
-        </div>
-        <div class="division-box">
-          <h4>SPEC Marketing</h4>
-          <p>Digital marketing — content management, caption writing, hashtag strategy, and social media scheduling so your brand stays active every month.</p>
+
+      <!-- FORM SIDE -->
+      <div class="contact-form-wrap">
+        <h3 class="form-title">Book A Shoot Or<br/>Request A Quote</h3>
+        <p class="form-subtitle">Fill out the form below and we'll get back to you within 24 business hours to discuss next steps.</p>
+
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" placeholder="Gabriel" required/>
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" placeholder="Lloyd" required/>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" placeholder="you@yourbusiness.com" required/>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="(215) 000-0000"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Business Name *</label>
+            <input type="text" placeholder="Your Business Name" required/>
+          </div>
+
+          <div class="form-group">
+            <label>Service You're Interested In *</label>
+            <select required>
+              <option value="" disabled selected>Select a service...</option>
+              <optgroup label="SPEC Media — Video">
+                <option>60-Second Promotional Video ($800)</option>
+                <option>30-Second Promotional Video ($500)</option>
+                <option>Real Estate Walkthrough Video ($300)</option>
+                <option>Event Coverage Highlight Reel ($1,000)</option>
+              </optgroup>
+              <optgroup label="SPEC Media — Photography">
+                <option>Photography Session ($250–$300)</option>
+                <option>Photography + Graphic Add-On</option>
+              </optgroup>
+              <optgroup label="SPEC Marketing">
+                <option>Content Management Add-On ($400/mo)</option>
+              </optgroup>
+              <optgroup label="Packages">
+                <option>Monthly Retainer — 2 Videos/Month ($1,200/mo)</option>
+                <option>Advance Booking — 3 Shoots (15% Off)</option>
+                <option>Same Day Package — Video + Photo (15% Off)</option>
+                <option>Monthly Retainer + Content Management</option>
+              </optgroup>
+              <option>Not Sure — Let's Talk</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Preferred Shoot Date</label>
+              <input type="date"/>
+            </div>
+            <div class="form-group">
+              <label>Budget Range</label>
+              <select>
+                <option value="" disabled selected>Select a range...</option>
+                <option>Under $500</option>
+                <option>$500 – $1,000</option>
+                <option>$1,000 – $2,000</option>
+                <option>$2,000+</option>
+                <option>Monthly Budget</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Tell Us About Your Project *</label>
+            <textarea placeholder="Describe your business, what you need, and any details that would help us understand your project..." required></textarea>
+          </div>
+
+          <p class="form-note">*A non-refundable 50% deposit is required to secure your booking date. We'll follow up within 24 business hours to confirm availability and send your invoice. Submitting this form does not guarantee a booking date.</p>
+
+          <button type="submit" class="form-submit">Send My Request →</button>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <h3>Message Sent! ✓</h3>
+          <p>Thank you for reaching out. We'll get back to you within 24 business hours to discuss your project and next steps.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CREDENTIALS -->
-<section class="credentials-section">
-  <div class="inner">
-    <span class="section-label outline">Background & Experience</span>
-    <h2 class="section-title white">The Person<br/>Behind The Brand</h2>
-    <p class="section-sub">Every shoot, every edit, every caption — backed by real education, real experience, and real passion for the craft.</p>
-    <div class="credentials-grid">
-      <div class="credential-card">
-        <div class="credential-icon">🎓</div>
-        <h3>B.S. Business Marketing</h3>
-        <p>Magna Cum Laude graduate from West Chester University of Pennsylvania. Marketing-first thinking applied to every creative project.</p>
-        <span class="credential-year">Class of December 2025</span>
-      </div>
-      <div class="credential-card">
-        <div class="credential-icon">📷</div>
-        <h3>5+ Years Experience</h3>
-        <p>Over five years of hands-on experience in freelance photography, videography, and digital marketing for businesses and events.</p>
-        <span class="credential-year">Since 2019</span>
-      </div>
-      <div class="credential-card">
-        <div class="credential-icon">🎪</div>
-        <h3>Event Coordination</h3>
-        <p>Photographer and Assistant Event Coordinator at Souped Up Saturdays LLC — co-coordinating large-scale automotive events across the region.</p>
-        <span class="credential-year">Since 2019</span>
-      </div>
-      <div class="credential-card">
-        <div class="credential-icon">⭐</div>
-        <h3>Eagle Scout</h3>
-        <p>Boy Scouts of America Eagle Scout — the highest rank in scouting. Built on leadership, accountability, and getting things done the right way.</p>
-        <span class="credential-year">2021</span>
-      </div>
-      <div class="credential-card">
-        <div class="credential-icon">🎣</div>
-        <h3>Lead Instructor</h3>
-        <p>Brotherhood Member and Lead Instructor at Brotherhood of the Jungle Cock — teaching fly-fishing and conservation curriculum to youth ages 10–18.</p>
-        <span class="credential-year">2021 – Present</span>
-      </div>
-      <div class="credential-card">
-        <div class="credential-icon">🎨</div>
-        <h3>Adobe Creative Suite</h3>
-        <p>Proficient in Premiere Pro, Lightroom, and Photoshop. Every video and photo is edited in-house to maintain full creative control and quality.</p>
-        <span class="credential-year">Canon R6 MK II</span>
-      </div>
-      <div class="credential-card">
-        <div class="credential-icon">📍</div>
-        <h3>Based In Philadelphia</h3>
-        <p>Headquartered in Brookhaven, PA — serving clients throughout Delaware County, Chester County, Philadelphia, and the Greater Philadelphia Area.</p>
-        <span class="credential-year">Brookhaven, PA</span>
-      </div>
-      <div class="credential-card">
-        <div class="credential-icon">🏢</div>
-        <h3>B2B Focused</h3>
-        <p>We work exclusively with businesses — restaurants, retail, real estate, events, and professional services. We understand what B2B clients need and deliver at that level.</p>
-        <span class="credential-year">Since Day One</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VALUES -->
-<section class="values-section">
-  <div class="inner">
-    <div style="text-align:center;margin-bottom:64px;">
-      <span class="section-label gold">What We Stand For</span>
-      <h2 class="section-title black">Our Core Values</h2>
-      <p class="section-sub" style="color:#666;margin:0 auto;">These aren't just words on a page. They're the reason clients come back.</p>
-    </div>
-    <div class="values-grid">
-      <div class="value-card">
-        <div class="value-number">01</div>
-        <h3>Professionalism First</h3>
-        <p>We show up prepared, on time, and ready. Every client gets the same level of care and quality regardless of budget or project size. Your brand deserves to be represented well — and we take that seriously.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-number">02</div>
-        <h3>Results Over Aesthetics</h3>
-        <p>We're not just making things look good — we're making things that work. Every video and photo we produce is built around a clear objective, a target audience, and a distribution strategy. Pretty isn't enough.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-number">03</div>
-        <h3>Transparency Always</h3>
-        <p>Clear pricing. Clear timelines. Clear communication. You'll always know what you're getting, what it costs, and when to expect it. No surprises, no confusion, no runaround.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="cta-banner">
+<!-- QUICK CONTACT STRIP -->
+<div class="quick-strip">
   <div>
-    <h2>Let's Build Something<br/>Together.</h2>
-    <p>Ready to take your brand's visual presence to the next level? Let's start with a conversation — no pressure, no commitment.</p>
+    <h3>Prefer To Reach Out Directly?</h3>
+    <p>Call, text, or email — we respond to everything within 24 business hours.</p>
   </div>
-  <div class="cta-btns">
-    <a href="/contact" href="/SPECMediaGroup/contact.html" class="btn-black">Get In Touch</a>
-    <a href="/media-services" href="/SPECMediaGroup/media-services.html" class="btn-black-outline">View Services</a>
+  <div class="quick-contacts">
+    <a href="tel:2152007740" class="quick-contact-btn">📞 (215) 200-7740</a>
+    <a href="/cdn-cgi/l/email-protection#8aeda4e6e6e5f3eecaf9faefe9e7eda4e9e5e7" class="quick-contact-btn">✉️ <span class="__cf_email__" data-cfemail="e483ca88888b9d80a4979481878983ca878b89">[email&#160;protected]</span></a>
+    <a href="https://www.instagram.com/spec.dm" class="quick-contact-btn">📸 Instagram</a>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span style="display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;padding:6px 16px;margin-bottom:20px;border:1px solid var(--gold);color:var(--gold);">Common Questions</span>
+    <h2 style="font-family:'Anton',sans-serif;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:3px;text-transform:uppercase;color:var(--white);line-height:1;margin-bottom:16px;">Frequently Asked<br/>Questions</h2>
+    <p style="font-size:1rem;font-weight:300;color:var(--gray);margin-bottom:56px;">Everything you need to know before booking with SPEC Media Group.</p>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>How do I book a shoot?</h4>
+        <p>Fill out the contact form above or call/text us directly. We'll confirm availability, send you a quote, and secure your date with a 50% non-refundable deposit.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How much is the deposit?</h4>
+        <p>A non-refundable 50% deposit is required to lock in your shoot date. The remaining balance is due before your final files are released.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What areas do you serve?</h4>
+        <p>We serve the Greater Philadelphia Area including Delaware County, Chester County, Philadelphia, the Main Line, and surrounding areas. Travel fees may apply for shoots outside the region.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How long until I get my files?</h4>
+        <p>Photography: 3–5 business days. 30-second video: 5–7 business days. 60-second video: 7–10 business days. Rush options available on every service.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What payment methods do you accept?</h4>
+        <p>We accept Zelle (preferred), PayPal Business, Venmo Business, and cash for local transactions. Invoices unpaid after 7 days are subject to a 1.5% weekly late fee.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Can I reschedule my shoot?</h4>
+        <p>One reschedule is permitted with at least 24 hours notice. Cancellations or reschedule requests within 24 hours may result in forfeiture of your deposit.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What do I need to prepare before the shoot?</h4>
+        <p>We'll cover everything in your pre-production consultation call. Generally: have your branding materials, logos, and any specific messaging ready. For real estate, ensure the property is clean and staged.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Do you own the footage after delivery?</h4>
+        <p>Upon full payment you receive usage rights for business and promotional purposes. Raw unedited footage remains SPEC Media Group's property unless separately purchased ($150–$200 flat).</p>
+      </div>
+      <div class="faq-item">
+        <h4>How does the Content Management Add-On work?</h4>
+        <p>You provide platform access and deliver your content each month. We write the captions, apply hashtags, and schedule everything to post across Instagram, Facebook, and LinkedIn on your behalf.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Can I use my content for paid ads?</h4>
+        <p>Yes — your usage rights cover business and promotional purposes including paid advertising. If you need specific ad formats or sizes, let us know at booking and we'll format accordingly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<div class="area-section">
+  <h3>Our Service Area</h3>
+  <p>Proudly serving businesses across the Greater Philadelphia Area and beyond.</p>
+  <div class="area-tags">
+    <span class="area-tag">Philadelphia, PA</span>
+    <span class="area-tag">Delaware County</span>
+    <span class="area-tag">Chester County</span>
+    <span class="area-tag">Montgomery County</span>
+    <span class="area-tag">The Main Line</span>
+    <span class="area-tag">Brookhaven, PA</span>
+    <span class="area-tag">Media, PA</span>
+    <span class="area-tag">West Chester, PA</span>
+    <span class="area-tag">Wilmington, DE</span>
+    <span class="area-tag">South Jersey</span>
   </div>
 </div>
 
@@ -340,7 +432,7 @@
     <div class="footer-col footer-contact">
       <h4>Get In Touch</h4>
       <p>📞 <a href="tel:2152007740">(215) 200-7740</a></p>
-      <p>✉️ <a href="/cdn-cgi/l/email-protection#b6d198dadad9cfd2f6c5c6d3d5dbd198d5d9db"><span class="__cf_email__" data-cfemail="ddbaf3b1b1b2a4b99daeadb8beb0baf3beb2b0">[email&#160;protected]</span></a></p>
+      <p>✉️ <a href="/cdn-cgi/l/email-protection#d3b4fdbfbfbcaab793a0a3b6b0beb4fdb0bcbe"><span class="__cf_email__" data-cfemail="5b3c75373734223f1b282b3e38363c75383436">[email&#160;protected]</span></a></p>
       <p>🌐 specmediagroup.com</p>
       <p style="margin-top:16px;"><a href="https://www.instagram.com/spec.dm" style="color:var(--gold);font-size:0.82rem;letter-spacing:2px;text-transform:uppercase;">Instagram ↗</a></p>
     </div>

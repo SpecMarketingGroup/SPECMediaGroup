@@ -1,1 +1,389 @@
-# SPECMediaGroup
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Retainers | SPEC Media Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root { --gold:#F5A800; --gold-dim:#c98a00; --black:#111111; --dark:#1a1a1a; --mid:#2d2d2d; --gray:#888888; --light:#f4f4f4; --white:#ffffff; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--black); color:var(--white); font-family:'Barlow',sans-serif; font-weight:400; line-height:1.6; overflow-x:hidden; }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(17,17,17,0.97); border-bottom:2px solid var(--gold); padding:0 48px; display:flex; align-items:center; justify-content:space-between; height:70px; backdrop-filter:blur(10px); }
+  .nav-logo { font-family:'Anton',sans-serif; font-size:1.3rem; letter-spacing:3px; color:var(--white); text-decoration:none; white-space:nowrap; }
+  .nav-logo span { color:var(--gold); }
+  .nav-links { display:flex; gap:4px; list-style:none; align-items:center; }
+  .nav-links li a { color:var(--white); text-decoration:none; font-size:0.78rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; padding:8px 14px; display:block; transition:color 0.2s; }
+  .nav-links li a:hover { color:var(--gold); }
+  .nav-links li a.active { color:var(--gold); }
+  .nav-cta { background:var(--gold); color:var(--black) !important; padding:10px 24px !important; font-weight:700 !important; white-space:nowrap; transition:background 0.2s !important; }
+  .nav-cta:hover { background:var(--gold-dim) !important; color:var(--white) !important; }
+
+  .fade-up { opacity:0; transform:translateY(40px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity:1; transform:none; }
+  .fade-up.d1 { transition-delay:0.1s; }
+  .fade-up.d2 { transition-delay:0.2s; }
+  .fade-up.d3 { transition-delay:0.3s; }
+
+  .page-hero { min-height:52vh; background:var(--dark); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 48px 80px; position:relative; overflow:hidden; }
+  .page-hero::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(245,168,0,0.03) 80px,rgba(245,168,0,0.03) 81px),repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(245,168,0,0.03) 80px,rgba(245,168,0,0.03) 81px); }
+  .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--gold); }
+  .hero-inner { position:relative; z-index:2; max-width:720px; }
+  .page-eyebrow { font-size:0.72rem; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; opacity:0; animation:fadeUp 0.8s ease forwards 0.2s; }
+  .page-hero h1 { font-family:'Anton',sans-serif; font-size:clamp(3rem,7vw,6rem); line-height:0.95; letter-spacing:3px; color:var(--white); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:fadeUp 0.8s ease forwards 0.4s; }
+  .page-hero h1 span { color:var(--gold); }
+  .page-hero p { font-size:1.05rem; font-weight:300; color:rgba(255,255,255,0.65); line-height:1.8; max-width:580px; margin:0 auto; opacity:0; animation:fadeUp 0.8s ease forwards 0.6s; }
+
+  section { padding:100px 80px; }
+  .inner { max-width:1100px; margin:0 auto; }
+  .section-label { display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; padding:6px 16px; margin-bottom:20px; }
+  .section-label.gold { background:var(--gold); color:var(--black); }
+  .section-label.outline { border:1px solid var(--gold); color:var(--gold); }
+  .section-title { font-family:'Anton',sans-serif; font-size:clamp(2rem,4vw,3.2rem); letter-spacing:3px; text-transform:uppercase; line-height:1; margin-bottom:16px; }
+  .section-sub { font-size:1rem; font-weight:300; color:var(--gray); margin-bottom:64px; max-width:640px; }
+
+  /* PACKAGES */
+  .packages-section { background:var(--black); }
+  .packages-grid { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin-bottom:48px; }
+  .pkg-card { background:var(--dark); padding:52px 44px; border-top:4px solid rgba(245,168,0,0.2); transition:border-color 0.25s, transform 0.25s, box-shadow 0.25s; position:relative; }
+  .pkg-card:hover { border-top-color:var(--gold); transform:translateY(-6px); box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+  .pkg-card.featured { background:var(--mid); border-top-color:var(--gold); }
+  .featured-badge { position:absolute; top:0; right:28px; background:var(--gold); color:var(--black); font-size:0.62rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; }
+  .pkg-term { font-size:0.68rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+  .pkg-name { font-family:'Anton',sans-serif; font-size:2.2rem; letter-spacing:2px; color:var(--white); margin-bottom:20px; text-transform:uppercase; line-height:1; }
+  .pkg-price-row { display:flex; align-items:baseline; gap:8px; margin-bottom:6px; }
+  .pkg-price { font-family:'Anton',sans-serif; font-size:3.2rem; color:var(--gold); line-height:1; letter-spacing:2px; }
+  .pkg-per { font-size:0.88rem; color:var(--gray); font-weight:300; }
+  .pkg-savings { display:inline-block; background:rgba(245,168,0,0.12); border:1px solid rgba(245,168,0,0.3); color:var(--gold); font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; margin-bottom:6px; }
+  .pkg-total { font-size:0.82rem; color:var(--gray); font-weight:300; margin-bottom:12px; }
+  .pkg-commitment { font-size:0.78rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.35); padding-bottom:28px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:28px; }
+  .pkg-includes h4 { font-size:0.68rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+  .pkg-item { display:flex; align-items:flex-start; gap:12px; margin-bottom:12px; }
+  .pkg-dot { width:5px; height:5px; background:var(--gold); border-radius:50%; margin-top:9px; flex-shrink:0; }
+  .pkg-item span { font-size:0.9rem; color:rgba(255,255,255,0.75); font-weight:300; line-height:1.5; }
+  .pkg-item span strong { color:var(--white); font-weight:600; }
+  .pkg-note { font-size:0.8rem; color:var(--gray); font-style:italic; line-height:1.6; margin-top:20px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.06); }
+  .pkg-cta { display:block; text-align:center; padding:16px 24px; font-size:0.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; border:2px solid var(--gold); color:var(--gold); transition:all 0.2s; margin-top:36px; }
+  .pkg-cta:hover, .pkg-card.featured .pkg-cta { background:var(--gold); color:var(--black); }
+  .pkg-disclaimer { font-size:0.82rem; color:var(--gray); font-weight:300; line-height:1.7; text-align:center; max-width:700px; margin:0 auto; font-style:italic; }
+
+  /* DELIVERABLES TABLE */
+  .deliverables-section { background:var(--dark); }
+  .del-table { width:100%; border-collapse:collapse; margin-bottom:40px; }
+  .del-table th { background:var(--black); color:var(--gold); font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:18px 24px; text-align:left; border-bottom:2px solid var(--gold); }
+  .del-table td { padding:16px 24px; font-size:0.9rem; border-bottom:1px solid rgba(255,255,255,0.06); vertical-align:middle; }
+  .del-table tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+  .del-table tr:hover td { background:rgba(245,168,0,0.04); transition:background 0.2s; }
+  .del-table td:first-child { font-weight:600; color:var(--white); }
+  .del-table td:not(:first-child) { color:rgba(255,255,255,0.65); font-weight:300; }
+  .del-qty { font-family:'Anton',sans-serif; font-size:1.1rem; color:var(--gold); }
+  .flexible-note { background:var(--mid); border-left:3px solid var(--gold); padding:24px 28px; }
+  .flexible-note p { font-size:0.9rem; color:rgba(255,255,255,0.7); font-weight:300; line-height:1.8; }
+  .flexible-note strong { color:var(--gold); }
+
+  /* HOW IT WORKS */
+  .how-section { background:var(--black); }
+  .how-steps { display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:64px; }
+  .how-step { background:var(--dark); padding:36px 28px; transition:background 0.25s; }
+  .how-step:hover { background:var(--mid); }
+  .step-num { font-family:'Anton',sans-serif; font-size:3.5rem; color:rgba(245,168,0,0.12); line-height:1; margin-bottom:16px; }
+  .how-step h3 { font-size:0.82rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--gold); margin-bottom:12px; }
+  .how-step p { font-size:0.85rem; color:rgba(255,255,255,0.6); line-height:1.7; font-weight:300; }
+
+  /* TERMS */
+  .terms-section { background:var(--dark); }
+  .terms-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:56px; }
+  .term-item { background:var(--mid); padding:28px 32px; border-left:3px solid rgba(245,168,0,0.2); transition:border-color 0.2s, background 0.2s; }
+  .term-item:hover { border-left-color:var(--gold); background:#333; }
+  .term-item h4 { font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+  .term-item p { font-size:0.88rem; font-weight:300; color:rgba(255,255,255,0.65); line-height:1.7; }
+
+  .cta-banner { background:var(--gold); padding:80px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap; }
+  .cta-banner h2 { font-family:'Anton',sans-serif; font-size:clamp(2rem,4vw,3rem); letter-spacing:3px; text-transform:uppercase; color:var(--black); line-height:1; margin-bottom:12px; }
+  .cta-banner p { font-size:1rem; font-weight:300; color:rgba(0,0,0,0.65); max-width:480px; }
+  .btn-black { background:var(--black); color:var(--gold); padding:16px 36px; font-size:0.82rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; display:inline-block; border:2px solid var(--black); transition:all 0.2s; }
+  .btn-black:hover { background:transparent; color:var(--black); }
+  .btn-black-outline { background:transparent; color:var(--black); padding:16px 36px; font-size:0.82rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; border:2px solid var(--black); text-decoration:none; display:inline-block; transition:all 0.2s; }
+  .btn-black-outline:hover { background:var(--black); color:var(--gold); }
+
+  footer { background:var(--dark); border-top:2px solid rgba(245,168,0,0.2); }
+  .footer-grid { max-width:1100px; margin:0 auto; padding:80px; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:60px; }
+  .footer-logo { font-family:'Anton',sans-serif; font-size:1.3rem; letter-spacing:3px; color:var(--white); text-decoration:none; display:block; margin-bottom:20px; }
+  .footer-logo span { color:var(--gold); }
+  .footer-tagline { font-size:0.88rem; font-weight:300; color:rgba(255,255,255,0.5); line-height:1.8; margin-bottom:16px; }
+  .footer-location { font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); }
+  .footer-col h4 { font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+  .footer-col ul { list-style:none; }
+  .footer-col ul li { margin-bottom:10px; }
+  .footer-col ul li a, .footer-col p a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.88rem; font-weight:300; transition:color 0.2s; }
+  .footer-col ul li a:hover, .footer-col p a:hover { color:var(--gold); }
+  .footer-col p { font-size:0.88rem; font-weight:300; color:rgba(255,255,255,0.6); margin-bottom:8px; }
+  .footer-bottom { max-width:1100px; margin:0 auto; padding:32px 80px 40px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06); }
+  .footer-bottom p { font-size:0.78rem; color:var(--gray); }
+  .footer-legal { display:flex; gap:24px; }
+  .footer-legal a { font-size:0.78rem; color:var(--gray); text-decoration:none; }
+  .footer-legal a:hover { color:var(--gold); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
+  @media(max-width:1000px) { .how-steps { grid-template-columns:1fr 1fr; } }
+  @media(max-width:900px) {
+    nav { padding:0 24px; }
+    .nav-links { display:none; }
+    section { padding:60px 24px; }
+    .packages-grid { grid-template-columns:1fr; }
+    .terms-grid { grid-template-columns:1fr; }
+    .cta-banner { padding:60px 24px; flex-direction:column; }
+    .footer-grid { grid-template-columns:1fr 1fr; gap:40px; padding:60px 24px; }
+    .footer-bottom { padding:24px; flex-direction:column; gap:16px; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>SPEC</span> Media Group</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="retainers.html" class="active">Retainers</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <p class="page-eyebrow">Monthly Content Partnerships</p>
+    <h1>Retainer <span>Plans</span></h1>
+    <p>A full month of professional, on-brand content, delivered, captioned, and ready to post. One retainer. A consistent content pipeline built around your business, at the pace that fits it.</p>
+  </div>
+</div>
+
+<!-- PACKAGES -->
+<section class="packages-section">
+  <div class="inner">
+    <span class="section-label outline fade-up">Flexible Partnerships</span>
+    <h2 class="section-title fade-up d1">Built Around<br/>Your Business</h2>
+    <p class="section-sub fade-up d2">No two businesses need the same content plan. Every retainer is scoped to your goals, your pace, and your budget. Pricing is quoted after a real conversation about what you actually need.</p>
+
+    <div class="packages-grid">
+      <!-- MONTH TO MONTH -->
+      <div class="pkg-card fade-up">
+        <div class="pkg-term">Month-to-Month</div>
+        <div class="pkg-name">Monthly Retainer</div>
+        <div class="pkg-commitment">No long-term contract. Cancel with 30-day notice.</div>
+        <div class="pkg-includes">
+          <h4>Every Month Includes</h4>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Short-Form Videos (15-45 sec), Reels and Facebook-ready with captions</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Long-Form Brand/Promo Video (1-3 min) with captions</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Professionally Edited Photos, product, atmosphere, lifestyle</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Graphic Overlays, promos, specials, pricing, events</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Full social media management: posting, captions, and scheduling handled remotely</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Meta ads management, setup, targeting, and campaigns run on your behalf</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Monthly strategy alignment and content planning</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>On-site shoot days scheduled around your operation</span></div>
+        </div>
+        <p class="pkg-note">Maximum flexibility. Stay because the content works, not because a contract says so.</p>
+        <a href="contact.html" class="pkg-cta">Get a Quote →</a>
+      </div>
+
+      <!-- QUARTERLY -->
+      <div class="pkg-card featured fade-up d1">
+        <div class="featured-badge">Best Value</div>
+        <div class="pkg-term">3-Month Commitment</div>
+        <div class="pkg-name">Quarterly Retainer</div>
+        <div class="pkg-commitment">Same deliverables, preferred monthly rate, billed monthly.</div>
+        <div class="pkg-includes">
+          <h4>Every Month Includes, Same As Monthly Plan</h4>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Short-Form Videos (15-45 sec), Reels and Facebook-ready with captions</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Long-Form Brand/Promo Video (1-3 min) with captions</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Professionally Edited Photos, product, atmosphere, lifestyle</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Graphic Overlays, promos, specials, pricing, events</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Full social media management: posting, captions, and scheduling handled remotely</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Meta ads management, setup, targeting, and campaigns run on your behalf</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>Monthly strategy alignment and content planning</span></div>
+          <div class="pkg-item"><div class="pkg-dot"></div><span>On-site shoot days scheduled around your operation</span></div>
+        </div>
+        <p class="pkg-note">Three consecutive months gives the content strategy real time to compound. Preferred rate over month-to-month.</p>
+        <a href="contact.html" class="pkg-cta">Get a Quote →</a>
+      </div>
+    </div>
+
+    <p class="pkg-disclaimer fade-up">Ad spend is billed directly by Meta to the client. Retainers cover content creation, page management, and ad management. Your accounts and content always remain your property.</p>
+  </div>
+</section>
+
+<!-- FILMING CADENCE -->
+<section class="packages-section" style="padding-top:0;">
+  <div class="inner">
+    <span class="section-label gold fade-up">Filming Frequency</span>
+    <h2 class="section-title fade-up d1">Pick Your<br/>Pace</h2>
+    <p class="section-sub fade-up d2">Shoot frequency is scoped to your goals during the quote. More filming days means more content volume and faster growth. Less means a leaner plan that still keeps your pages alive and consistent.</p>
+    <div class="packages-grid" style="grid-template-columns:repeat(3,1fr);gap:24px;">
+      <div class="pkg-card fade-up">
+        <div class="pkg-term">Aggressive Growth</div>
+        <div class="pkg-name" style="font-size:1.5rem;">2x / Week</div>
+        <div class="pkg-includes"><div class="pkg-item"><div class="pkg-dot"></div><span>A daily-feel presence. Maximum content volume, fastest audience growth, ideal for launches and busy seasons.</span></div></div>
+      </div>
+      <div class="pkg-card featured fade-up d1" style="transform:none;">
+        <div class="featured-badge">Most Common</div>
+        <div class="pkg-term">Steady Build</div>
+        <div class="pkg-name" style="font-size:1.5rem;">1x / Week</div>
+        <div class="pkg-includes"><div class="pkg-item"><div class="pkg-dot"></div><span>Consistent weekly content that compounds. The right fit for most shops and local businesses.</span></div></div>
+      </div>
+      <div class="pkg-card fade-up d2">
+        <div class="pkg-term">Lean Plan</div>
+        <div class="pkg-name" style="font-size:1.5rem;">Bi-Weekly</div>
+        <div class="pkg-includes"><div class="pkg-item"><div class="pkg-dot"></div><span>Two shoot days a month keeps your pages active and professional without a heavy footprint.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES TABLE -->
+<section class="deliverables-section">
+  <div class="inner">
+    <span class="section-label gold fade-up">Full Breakdown</span>
+    <h2 class="section-title fade-up d1">What You Receive<br/>Every Month</h2>
+    <p class="section-sub fade-up d2">Every deliverable produced, edited, and delivered ready to post. Quantities are scoped to your plan during the quote: the more content you want, the bigger the plan.</p>
+    <table class="del-table fade-up">
+      <thead>
+        <tr>
+          <th>Deliverable</th>
+          <th>Format</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Short-Form Videos</td><td><span class="del-qty">15-45 sec</span></td><td>Reels and Facebook-ready, captions included</td></tr>
+        <tr><td>Long-Form Brand/Promo Video</td><td><span class="del-qty">1-3 min</span></td><td>Color grade, sound design, captions</td></tr>
+        <tr><td>Professionally Edited Photos</td><td><span class="del-qty">Included</span></td><td>Product, atmosphere, lifestyle, retouched and color corrected</td></tr>
+        <tr><td>Graphic Overlays</td><td><span class="del-qty">Included</span></td><td>Promos, specials, pricing, events, formatted for feed and stories</td></tr>
+        <tr><td>Full Social Media Management</td><td><span class="del-qty">Retainer Only</span></td><td>Posting, captions, hashtags, and scheduling handled remotely by SPEC</td></tr>
+        <tr><td>Meta Ads Management</td><td><span class="del-qty">Retainer Only</span></td><td>Ad setup, targeting, and campaign management run remotely on your behalf</td></tr>
+        <tr><td>On-Site Shoot Days</td><td><span class="del-qty">Scoped</span></td><td>Twice a week, weekly, or bi-weekly, set by your plan</td></tr>
+      </tbody>
+    </table>
+    <div class="flexible-note fade-up">
+      <p><strong>Retainer format is flexible.</strong> The deliverable mix above is our standard package, but the format is adjustable to best integrate with your specific business. Different industries have different needs, the content plan is structured around what will actually move the needle for you. Reach out and we'll talk through your goals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="inner">
+    <span class="section-label outline fade-up">The Process</span>
+    <h2 class="section-title fade-up d1">How It Works</h2>
+    <p class="section-sub fade-up d2">A repeatable monthly process designed to keep your content consistent and your audience growing.</p>
+  </div>
+  <div class="how-steps">
+    <div class="how-step fade-up">
+      <div class="step-num">01</div>
+      <h3>Onboarding</h3>
+      <p>We align on your brand, goals, upcoming events, specials, and anything you want to highlight that month.</p>
+    </div>
+    <div class="how-step fade-up d1">
+      <div class="step-num">02</div>
+      <h3>Shoot Days</h3>
+      <p>On-site shoot days at the pace your plan sets, short-form content, long-form video, photos, and graphic source material all captured on-site.</p>
+    </div>
+    <div class="how-step fade-up d2">
+      <div class="step-num">03</div>
+      <h3>Post-Production</h3>
+      <p>Every deliverable edited in-house: color grade, sound design, captions, retouching, and graphic overlays.</p>
+    </div>
+    <div class="how-step fade-up d3">
+      <div class="step-num">04</div>
+      <h3>Delivery</h3>
+      <p>All content edited and finalized, then posted and managed directly on your pages by SPEC, on a schedule built for growth.</p>
+    </div>
+    <div class="how-step fade-up d3">
+      <div class="step-num">05</div>
+      <h3>Repeat</h3>
+      <p>Every month, fresh content. We adjust the strategy based on what's working and what your audience responds to.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section class="terms-section">
+  <div class="inner">
+    <span class="section-label gold fade-up">Retainer Terms</span>
+    <h2 class="section-title fade-up d1">What To Expect</h2>
+    <div class="terms-grid">
+      <div class="term-item fade-up">
+        <h4>Payment Schedule</h4>
+        <p>First month's payment is due in full before work begins or any shoot is scheduled. Subsequent months are invoiced on the 1st and due by the 5th.</p>
+      </div>
+      <div class="term-item fade-up d1">
+        <h4>Cancellation Policy</h4>
+        <p>Month-to-month clients require 30-day written notice to cancel. 3-month clients commit to the full 3-month term.</p>
+      </div>
+      <div class="term-item fade-up">
+        <h4>Ad Spend</h4>
+        <p>Ad spend is billed directly by Meta to the client. SPEC manages your pages and ad campaigns remotely as part of a retainer. Full management requires account access; if you prefer not to grant access, we deliver content and a posting plan instead.</p>
+      </div>
+      <div class="term-item fade-up d1">
+        <h4>Content Ownership</h4>
+        <p>All content and accounts remain the property of the client. If we ever part ways, everything stays with you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <div>
+    <h2>Ready To Get<br/>Started?</h2>
+    <p>Reach out and we'll put together the right plan for your business. No pressure, just a real conversation about your goals.</p>
+  </div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <a href="contact.html" class="btn-black">Get In Touch</a>
+    <a href="services.html" class="btn-black-outline">View Services</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html" class="footer-logo"><span>SPEC</span> Media Group</a>
+      <p class="footer-tagline">Boutique creative production and content strategy for small businesses across the Greater Philadelphia Area.</p>
+      <p class="footer-location">Delaware &amp; Chester County, PA</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Event Coverage</a></li>
+        <li><a href="services.html">Promo Short Film</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Retainers</h4>
+      <ul>
+        <li><a href="retainers.html">Monthly Retainer</a></li>
+        <li><a href="retainers.html">Quarterly Retainer</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get In Touch</h4>
+      <p>📞 <a href="tel:12152007740" style="color:inherit;text-decoration:none;">215-200-7740</a><br/>✉️ <a href="mailto:hello@specmg.com">hello@specmg.com</a></p>
+      <p>🌐 <a href="https://specmg.com">specmg.com</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 SPEC Media Group. All rights reserved.</p>
+    
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

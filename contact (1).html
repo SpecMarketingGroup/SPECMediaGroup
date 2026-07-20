@@ -6,7 +6,7 @@
 <title>Contact | SPEC Media Group</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet"/>
 <style>
-  :root { --gold:#F5A800; --gold-light:#FFF8E7; --gold-dim:#c98a00; --black:#111111; --dark:#1a1a1a; --mid:#2d2d2d; --gray:#888888; --light:#f4f4f4; --white:#ffffff; }
+  :root { --gold:#F5A800; --gold-dim:#c98a00; --black:#111111; --dark:#1a1a1a; --mid:#2d2d2d; --gray:#888888; --light:#f4f4f4; --white:#ffffff; }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
   body { background:var(--black); color:var(--white); font-family:'Barlow',sans-serif; font-weight:400; line-height:1.6; overflow-x:hidden; }
@@ -14,23 +14,22 @@
   nav { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(17,17,17,0.97); border-bottom:2px solid var(--gold); padding:0 48px; display:flex; align-items:center; justify-content:space-between; height:70px; backdrop-filter:blur(10px); }
   .nav-logo { font-family:'Anton',sans-serif; font-size:1.3rem; letter-spacing:3px; color:var(--white); text-decoration:none; white-space:nowrap; }
   .nav-logo span { color:var(--gold); }
-  .nav-links { display:flex; gap:8px; list-style:none; align-items:center; }
-  .nav-links > li > a { color:var(--white); text-decoration:none; font-size:0.78rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; padding:8px 14px; display:block; transition:color 0.2s; }
-  .nav-links > li > a:hover, .nav-links > li > a.active { color:var(--gold); }
-  .dropdown { position:relative; }
-  .dropdown-menu { display:none; position:absolute; top:100%; left:0; background:var(--dark); border:1px solid rgba(245,168,0,0.2); border-top:2px solid var(--gold); min-width:200px; z-index:1001; }
-  .dropdown:hover .dropdown-menu { display:block; }
-  .dropdown-menu a { display:block; padding:12px 20px; color:var(--white); text-decoration:none; font-size:0.78rem; font-weight:500; letter-spacing:1px; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.05); transition:background 0.2s,color 0.2s; }
-  .dropdown-menu a:hover { background:rgba(245,168,0,0.1); color:var(--gold); }
-  .dropdown > a::after { content:' ▾'; font-size:0.7rem; }
-  .nav-cta { background:var(--gold); color:var(--black); padding:10px 24px; font-size:0.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; display:inline-block; transition:background 0.2s; white-space:nowrap; }
-  .nav-cta:hover { background:var(--gold-dim); color:var(--white); }
+  .nav-links { display:flex; gap:4px; list-style:none; align-items:center; }
+  .nav-links li a { color:var(--white); text-decoration:none; font-size:0.78rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; padding:8px 14px; display:block; transition:color 0.2s; }
+  .nav-links li a:hover { color:var(--gold); }
+  .nav-links li a.active { color:var(--gold); }
+  .nav-cta { background:var(--gold); color:var(--black) !important; padding:10px 24px !important; font-weight:700 !important; white-space:nowrap; transition:background 0.2s !important; }
+  .nav-cta:hover { background:var(--gold-dim) !important; color:var(--white) !important; }
 
-  /* HERO */
-  .page-hero { min-height:45vh; background:var(--dark); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 48px 80px; position:relative; overflow:hidden; }
+  .fade-up { opacity:0; transform:translateY(40px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity:1; transform:none; }
+  .fade-up.d1 { transition-delay:0.1s; }
+  .fade-up.d2 { transition-delay:0.2s; }
+
+  .page-hero { min-height:40vh; background:var(--dark); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 48px 80px; position:relative; overflow:hidden; }
   .page-hero::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(245,168,0,0.03) 80px,rgba(245,168,0,0.03) 81px),repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(245,168,0,0.03) 80px,rgba(245,168,0,0.03) 81px); }
   .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--gold); }
-  .hero-content { position:relative; z-index:2; max-width:700px; }
+  .hero-inner { position:relative; z-index:2; max-width:720px; }
   .page-eyebrow { font-size:0.72rem; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; opacity:0; animation:fadeUp 0.8s ease forwards 0.2s; }
   .page-hero h1 { font-family:'Anton',sans-serif; font-size:clamp(3rem,7vw,6rem); line-height:0.95; letter-spacing:3px; color:var(--white); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:fadeUp 0.8s ease forwards 0.4s; }
   .page-hero h1 span { color:var(--gold); }
@@ -38,108 +37,83 @@
 
   /* CONTACT LAYOUT */
   .contact-section { background:var(--black); padding:100px 80px; }
-  .contact-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:80px; align-items:start; }
+  .contact-grid { display:grid; grid-template-columns:1fr 2fr; gap:80px; max-width:1100px; margin:0 auto; }
 
-  /* CONTACT INFO */
-  .contact-info h2 { font-family:'Anton',sans-serif; font-size:2rem; letter-spacing:3px; text-transform:uppercase; color:var(--white); line-height:1; margin-bottom:24px; }
-  .contact-info > p { font-size:0.98rem; font-weight:300; color:rgba(255,255,255,0.65); line-height:1.9; margin-bottom:40px; }
-  .contact-item { display:flex; gap:20px; align-items:flex-start; margin-bottom:32px; padding-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.08); }
-  .contact-item:last-of-type { border-bottom:none; }
-  .contact-icon { width:48px; height:48px; background:rgba(245,168,0,0.1); border:1px solid rgba(245,168,0,0.3); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
-  .contact-item-content h4 { font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
-  .contact-item-content p { font-size:0.95rem; color:rgba(255,255,255,0.7); font-weight:300; line-height:1.6; }
-  .contact-item-content a { color:var(--white); text-decoration:none; transition:color 0.2s; }
+  /* LEFT INFO */
+  .contact-info h3 { font-family:'Anton',sans-serif; font-size:1.6rem; letter-spacing:2px; text-transform:uppercase; color:var(--white); margin-bottom:8px; }
+  .contact-info > p { font-size:0.98rem; font-weight:300; color:rgba(255,255,255,0.6); line-height:1.8; margin-bottom:40px; }
+  .contact-item { display:flex; gap:16px; align-items:flex-start; margin-bottom:28px; }
+  .contact-icon { font-size:1.4rem; flex-shrink:0; margin-top:2px; }
+  .contact-item-content h4 { font-size:0.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+  .contact-item-content p { font-size:0.92rem; font-weight:300; color:rgba(255,255,255,0.7); line-height:1.6; }
+  .contact-item-content a { color:rgba(255,255,255,0.7); text-decoration:none; transition:color 0.2s; }
   .contact-item-content a:hover { color:var(--gold); }
-  .social-links { margin-top:40px; }
-  .social-links h4 { font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
-  .social-link { display:inline-flex; align-items:center; gap:10px; padding:12px 20px; border:1px solid rgba(245,168,0,0.3); color:var(--white); text-decoration:none; font-size:0.82rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; transition:all 0.2s; margin-right:12px; margin-bottom:12px; }
-  .social-link:hover { background:rgba(245,168,0,0.1); border-color:var(--gold); color:var(--gold); }
+  .contact-item-content .sub { font-size:0.8rem; color:var(--gray); margin-top:4px; }
 
-  /* CONTACT FORM */
-  .contact-form-wrap { background:var(--dark); padding:48px; border-top:3px solid var(--gold); }
-  .form-title { font-family:'Anton',sans-serif; font-size:1.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--white); margin-bottom:8px; }
-  .form-subtitle { font-size:0.88rem; color:var(--gray); font-weight:300; margin-bottom:36px; }
-  .form-group { margin-bottom:20px; }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
-  .form-group label { display:block; font-size:0.68rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
-  .form-group input, .form-group select, .form-group textarea {
-    width:100%; background:var(--mid); border:1px solid rgba(255,255,255,0.1); color:var(--white);
-    padding:14px 16px; font-family:'Barlow',sans-serif; font-size:0.92rem; font-weight:300;
-    outline:none; transition:border-color 0.2s; appearance:none;
-  }
-  .form-group select { cursor:pointer; }
-  .form-group select option { background:var(--mid); }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--gold); }
-  .form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.25); }
-  .form-group textarea { resize:vertical; min-height:140px; }
-  .form-note { font-size:0.78rem; color:var(--gray); font-style:italic; margin-bottom:24px; line-height:1.6; }
-  .form-submit { width:100%; background:var(--gold); color:var(--black); padding:18px 36px; font-family:'Barlow',sans-serif; font-size:0.88rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; border:2px solid var(--gold); cursor:pointer; transition:all 0.2s; }
-  .form-submit:hover { background:transparent; color:var(--gold); }
-  .form-success { display:none; background:rgba(245,168,0,0.1); border:1px solid var(--gold); padding:24px; text-align:center; }
-  .form-success h3 { font-family:'Anton',sans-serif; font-size:1.4rem; letter-spacing:2px; color:var(--gold); margin-bottom:8px; }
-  .form-success p { font-size:0.88rem; color:rgba(255,255,255,0.7); font-weight:300; }
+  /* HONEYBOOK EMBED AREA */
+  .hb-wrap { background:var(--dark); border-top:3px solid var(--gold); padding:0; overflow:hidden; }
+  .hb-header { padding:36px 40px 28px; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .hb-header h3 { font-family:'Anton',sans-serif; font-size:1.6rem; letter-spacing:2px; text-transform:uppercase; color:var(--white); margin-bottom:8px; line-height:1; }
+  .hb-header p { font-size:0.9rem; font-weight:300; color:rgba(255,255,255,0.6); line-height:1.7; }
 
-  /* QUICK CONTACT STRIP */
-  .quick-strip { background:var(--gold); padding:48px 80px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; }
-  .quick-strip h3 { font-family:'Anton',sans-serif; font-size:1.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--black); }
-  .quick-strip p { color:rgba(0,0,0,0.6); font-size:0.95rem; font-weight:300; margin-top:4px; }
-  .quick-contacts { display:flex; gap:20px; flex-wrap:wrap; }
-  .quick-contact-btn { display:inline-flex; align-items:center; gap:10px; background:var(--black); color:var(--gold); padding:14px 24px; font-size:0.8rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:all 0.2s; border:2px solid var(--black); }
-  .quick-contact-btn:hover { background:transparent; color:var(--black); border-color:var(--black); }
+  /* HoneyBook iframe embed */
+  .hb-embed { width:100%; min-height:700px; background:var(--dark); }
+  .hb-embed iframe { width:100%; min-height:700px; border:none; display:block; }
+
+  /* Fallback if no embed configured yet */
+  .hb-fallback { padding:48px 40px; text-align:center; display:none; }
+  .hb-fallback p { font-size:0.9rem; font-weight:300; color:var(--gray); margin-bottom:28px; line-height:1.7; }
+  .btn-gold { background:var(--gold); color:var(--black); padding:16px 36px; font-size:0.82rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; border:2px solid var(--gold); text-decoration:none; display:inline-block; transition:all 0.2s; }
+  .btn-gold:hover { background:transparent; color:var(--gold); }
+
+  /* QUICK STRIP */
+  .quick-strip { background:var(--dark); padding:60px 80px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; border-top:1px solid rgba(245,168,0,0.15); }
+  .quick-strip h3 { font-family:'Anton',sans-serif; font-size:1.4rem; letter-spacing:2px; text-transform:uppercase; color:var(--white); margin-bottom:6px; }
+  .quick-strip p { font-size:0.9rem; font-weight:300; color:var(--gray); }
+  .quick-btn { background:transparent; border:2px solid rgba(245,168,0,0.5); color:var(--gold); padding:12px 24px; font-size:0.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:all 0.2s; }
+  .quick-btn:hover { background:var(--gold); color:var(--black); border-color:var(--gold); }
 
   /* FAQ */
-  .faq-section { background:var(--dark); padding:100px 80px; }
-  .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
-  .faq-item { background:var(--mid); padding:32px 28px; border-left:3px solid transparent; transition:border-color 0.2s; cursor:pointer; }
-  .faq-item:hover { border-left-color:var(--gold); }
-  .faq-item h4 { font-size:0.9rem; font-weight:700; color:var(--white); margin-bottom:12px; line-height:1.4; }
-  .faq-item p { font-size:0.86rem; color:rgba(255,255,255,0.6); font-weight:300; line-height:1.8; }
+  .faq-section { background:var(--black); padding:100px 80px; }
+  .faq-inner { max-width:1100px; margin:0 auto; }
+  .section-label { display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; padding:6px 16px; margin-bottom:20px; }
+  .section-label.outline { border:1px solid var(--gold); color:var(--gold); }
+  .section-title { font-family:'Anton',sans-serif; font-size:clamp(2rem,4vw,3.2rem); letter-spacing:3px; text-transform:uppercase; line-height:1; margin-bottom:16px; }
+  .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:56px; }
+  .faq-item { padding:28px 32px; background:var(--dark); border-left:3px solid rgba(245,168,0,0.25); transition:border-color 0.2s, background 0.2s; }
+  .faq-item:hover { border-left-color:var(--gold); background:var(--mid); }
+  .faq-item h4 { font-size:0.85rem; font-weight:700; letter-spacing:1px; color:var(--white); margin-bottom:10px; text-transform:uppercase; }
+  .faq-item p { font-size:0.88rem; font-weight:300; color:rgba(255,255,255,0.6); line-height:1.8; }
 
-  /* AREA */
-  .area-section { background:var(--black); padding:80px; text-align:center; border-top:2px solid rgba(245,168,0,0.2); }
-  .area-section h3 { font-family:'Anton',sans-serif; font-size:1.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--white); margin-bottom:16px; }
-  .area-section p { font-size:0.95rem; color:var(--gray); font-weight:300; margin-bottom:32px; }
-  .area-tags { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-  .area-tag { font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); padding:8px 16px; border:1px solid rgba(245,168,0,0.3); }
-
-  footer { background:var(--black); border-top:2px solid var(--gold); padding:72px 80px 40px; }
-  .footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:48px; margin-bottom:56px; }
-  .footer-logo { font-family:'Anton',sans-serif; font-size:1.4rem; letter-spacing:3px; color:var(--white); margin-bottom:12px; display:block; text-decoration:none; }
+  footer { background:var(--dark); border-top:2px solid rgba(245,168,0,0.2); }
+  .footer-grid { max-width:1100px; margin:0 auto; padding:80px; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:60px; }
+  .footer-logo { font-family:'Anton',sans-serif; font-size:1.3rem; letter-spacing:3px; color:var(--white); text-decoration:none; display:block; margin-bottom:20px; }
   .footer-logo span { color:var(--gold); }
-  .footer-tagline { font-size:0.78rem; color:var(--gray); line-height:1.7; margin-bottom:16px; font-weight:300; }
-  .footer-location { font-size:0.72rem; color:var(--gold); letter-spacing:2px; text-transform:uppercase; }
-  .footer-col h4 { font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid rgba(245,168,0,0.2); }
+  .footer-tagline { font-size:0.88rem; font-weight:300; color:rgba(255,255,255,0.5); line-height:1.8; margin-bottom:16px; }
+  .footer-location { font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); }
+  .footer-col h4 { font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
   .footer-col ul { list-style:none; }
   .footer-col ul li { margin-bottom:10px; }
-  .footer-col ul li a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.85rem; font-weight:300; transition:color 0.2s; }
-  .footer-col ul li a:hover { color:var(--gold); }
-  .footer-contact p { font-size:0.85rem; color:rgba(255,255,255,0.6); font-weight:300; margin-bottom:8px; line-height:1.6; }
-  .footer-contact a { color:var(--gold); text-decoration:none; }
-  .footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
-  .footer-bottom p { font-size:0.75rem; color:var(--gray); }
+  .footer-col ul li a, .footer-col p a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.88rem; font-weight:300; transition:color 0.2s; }
+  .footer-col ul li a:hover, .footer-col p a:hover { color:var(--gold); }
+  .footer-col p { font-size:0.88rem; font-weight:300; color:rgba(255,255,255,0.6); margin-bottom:8px; }
+  .footer-bottom { max-width:1100px; margin:0 auto; padding:32px 80px 40px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06); }
+  .footer-bottom p { font-size:0.78rem; color:var(--gray); }
   .footer-legal { display:flex; gap:24px; }
-  .footer-legal a { font-size:0.72rem; color:var(--gray); text-decoration:none; transition:color 0.2s; }
+  .footer-legal a { font-size:0.78rem; color:var(--gray); text-decoration:none; }
   .footer-legal a:hover { color:var(--gold); }
 
-  @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-
-  @media (max-width:900px) {
+  @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:none; } }
+  @media(max-width:900px) {
     nav { padding:0 24px; }
     .nav-links { display:none; }
-    .page-hero { padding:120px 32px 60px; }
-    .contact-section { padding:72px 32px; }
+    .contact-section { padding:60px 24px; }
     .contact-grid { grid-template-columns:1fr; gap:48px; }
-    .form-row { grid-template-columns:1fr; }
-    .quick-strip { padding:48px 32px; flex-direction:column; }
-    .faq-section { padding:72px 32px; }
+    .quick-strip { padding:48px 24px; flex-direction:column; }
+    .faq-section { padding:60px 24px; }
     .faq-grid { grid-template-columns:1fr; }
-    .area-section { padding:60px 32px; }
-    .footer-grid { grid-template-columns:1fr 1fr; }
-    footer { padding:60px 32px 32px; }
-  }
-  @media (max-width:600px) {
-    .footer-grid { grid-template-columns:1fr; }
-    .contact-form-wrap { padding:32px 24px; }
+    .footer-grid { grid-template-columns:1fr 1fr; gap:40px; padding:60px 24px; }
+    .footer-bottom { padding:24px; flex-direction:column; gap:16px; text-align:center; }
   }
 </style>
 </head>
@@ -149,304 +123,195 @@
   <a href="index.html" class="nav-logo"><span>SPEC</span> Media Group</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li class="dropdown">
-      <a href="media-services.html">SPEC Media</a>
-      <div class="dropdown-menu">
-        <a href="media-services.html">Media Services</a>
-        <a href="portfolio.html">Portfolio</a>
-      </div>
-    </li>
-    <li class="dropdown">
-      <a href="marketing-services.html">SPEC Marketing</a>
-      <div class="dropdown-menu">
-        <a href="marketing-services.html">Marketing Services</a>
-        <a href="packages.html">Packages</a>
-      </div>
-    </li>
+    <li><a href="retainers.html">Retainers</a></li>
+    <li><a href="services.html">Services</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started</a></li>
   </ul>
-  <a href="contact.html" class="nav-cta">Book Now</a>
 </nav>
 
 <div class="page-hero">
-  <div class="hero-content">
-    <p class="page-eyebrow">SPEC Media Group &nbsp;·&nbsp; Let's Talk</p>
+  <div class="hero-inner">
+    <p class="page-eyebrow">Let's Talk</p>
     <h1>Get In <span>Touch</span></h1>
-    <p>Ready to book a shoot, ask about pricing, or just want to learn more? Fill out the form below and we'll get back to you within 24 business hours.</p>
+    <p>Ready to book a shoot or explore a retainer? Fill out the form and we'll get back to you within 24 business hours.</p>
   </div>
 </div>
 
 <!-- CONTACT SECTION -->
-<section class="contact-section">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div class="contact-grid">
+<div class="contact-section">
+  <div class="contact-grid">
 
-      <!-- INFO SIDE -->
-      <div class="contact-info">
-        <h2>Let's Start A<br/>Conversation</h2>
-        <p>Whether you're ready to book or just exploring your options — we're happy to talk through what makes sense for your business. No pressure, no sales pitch. Just an honest conversation about what we can do for you.</p>
+    <!-- LEFT INFO -->
+    <div class="contact-info fade-up">
+      <h3>Reach Out</h3>
+      <p>Whether you're ready to book or just have questions, every inquiry gets a real response, usually same day.</p>
 
-        <div class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div class="contact-item-content">
-            <h4>Phone</h4>
-            <p><a href="tel:2152007740">(215) 200-7740</a></p>
-            <p style="font-size:0.82rem;color:var(--gray);margin-top:4px;">Call or text — we respond to both</p>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-icon">✉️</div>
-          <div class="contact-item-content">
-            <h4>Email</h4>
-            <p><a href="mailto:hello@specmg.com">hello@specmg.com</a></p>
-            <p style="font-size:0.82rem;color:var(--gray);margin-top:4px;">Response within 24 business hours</p>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <div class="contact-item-content">
-            <h4>Service Area</h4>
-            <p>Greater Philadelphia Area</p>
-            <p style="font-size:0.82rem;color:var(--gray);margin-top:4px;">Delaware County, Chester County, Philadelphia & surrounding areas</p>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-icon">🕐</div>
-          <div class="contact-item-content">
-            <h4>Response Time</h4>
-            <p>Within 24 Business Hours</p>
-            <p style="font-size:0.82rem;color:var(--gray);margin-top:4px;">Monday–Friday, 9am–6pm EST</p>
-          </div>
-        </div>
-
-        <div class="social-links">
-          <h4>Follow Us</h4>
-          
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-item-content">
+          <h4>Email</h4>
+          <p><a href="mailto:hello@specmg.com">hello@specmg.com</a></p>
+          <p class="sub">Response within 24 business hours</p>
         </div>
       </div>
 
-      <!-- FORM SIDE -->
-      <div class="contact-form-wrap">
-        <h3 class="form-title">Book A Shoot Or<br/>Request A Quote</h3>
-        <p class="form-subtitle">Fill out the form below and we'll get back to you within 24 business hours to discuss next steps.</p>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-item-content">
+          <h4>Service Area</h4>
+          <p>Greater Philadelphia Area</p>
+          <p class="sub">Delaware County, Chester County, Philadelphia &amp; surrounding areas</p>
+        </div>
+      </div>
 
-        <form id="contactForm" method="POST" action="https://formspree.io/f/xlgodlkp">
-          <div class="form-row">
-            <div class="form-group">
-              <label>First Name *</label>
-              <input type="text" placeholder="Gabriel" required/>
-            </div>
-            <div class="form-group">
-              <label>Last Name *</label>
-              <input type="text" placeholder="Lloyd" required/>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Email Address *</label>
-              <input type="email" placeholder="you@yourbusiness.com" required/>
-            </div>
-            <div class="form-group">
-              <label>Phone Number</label>
-              <input type="tel" placeholder="(215) 000-0000"/>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Business Name *</label>
-            <input type="text" placeholder="Your Business Name" required/>
-          </div>
-
-          <div class="form-group">
-            <label>Service You're Interested In *</label>
-            <select required>
-              <option value="" disabled selected>Select a service...</option>
-              <optgroup label="SPEC Media — Video">
-                <option>60-Second Promotional Video ($800)</option>
-                <option>30-Second Promotional Video ($500)</option>
-                <option>Real Estate Walkthrough Video ($300)</option>
-                <option>Event Coverage Highlight Reel ($1,000)</option>
-              </optgroup>
-              <optgroup label="SPEC Media — Photography">
-                <option>Photography Session ($250–$300)</option>
-                <option>Photography + Graphic Add-On</option>
-              </optgroup>
-              <optgroup label="SPEC Marketing">
-                <option>Content Management Add-On ($400/mo)</option>
-              </optgroup>
-              <optgroup label="Packages">
-                <option>Monthly Retainer — 2 Videos/Month ($1,200/mo)</option>
-                <option>Advance Booking — 3 Shoots (15% Off)</option>
-                <option>Same Day Package — Video + Photo (15% Off)</option>
-                <option>Monthly Retainer + Content Management</option>
-              </optgroup>
-              <option>Not Sure — Let's Talk</option>
-            </select>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Preferred Shoot Date</label>
-              <input type="date"/>
-            </div>
-            <div class="form-group">
-              <label>Budget Range</label>
-              <select>
-                <option value="" disabled selected>Select a range...</option>
-                <option>Under $500</option>
-                <option>$500 – $1,000</option>
-                <option>$1,000 – $2,000</option>
-                <option>$2,000+</option>
-                <option>Monthly Budget</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Tell Us About Your Project *</label>
-            <textarea placeholder="Describe your business, what you need, and any details that would help us understand your project..." required></textarea>
-          </div>
-
-          <p class="form-note">*A non-refundable 50% deposit is required to secure your booking date. We'll follow up within 24 business hours to confirm availability and send your invoice. Submitting this form does not guarantee a booking date.</p>
-
-          <button type="submit" class="form-submit">Send My Request →</button>
-        </form>
-
-        <div class="form-success" id="formSuccess">
-          <h3>Message Sent! ✓</h3>
-          <p>Thank you for reaching out. We'll get back to you within 24 business hours to discuss your project and next steps.</p>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-item-content">
+          <h4>Response Time</h4>
+          <p>Within 24 Business Hours</p>
+          <p class="sub">Monday–Friday, 9am–6pm EST</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- QUICK CONTACT STRIP -->
+    <!-- RIGHT: HONEYBOOK EMBED -->
+    <div class="hb-wrap fade-up d1">
+      <div class="hb-header">
+        <h3>Book A Shoot Or<br/>Request A Quote</h3>
+        <p>Fill out the form below and we'll get back to you within 24 business hours to discuss next steps and availability.</p>
+      </div>
+
+      <!--
+        ════════════════════════════════════════════════
+        HONEYBOOK EMBED, REPLACE THIS SECTION
+        ════════════════════════════════════════════════
+        Option 1, IFRAME EMBED (from HoneyBook → Settings → Contact Form → Embed):
+        Replace the src URL below with your HoneyBook contact form embed URL.
+
+        Option 2, SCRIPT EMBED (if HoneyBook provides a widget script):
+        Paste the full <script> and <div> tags from HoneyBook here instead.
+        ════════════════════════════════════════════════
+      -->
+      <div class="hb-embed">
+        <iframe
+          src="YOUR_HONEYBOOK_CONTACT_FORM_URL_HERE"
+          id="hb-iframe"
+          scrolling="yes"
+          allowtransparency="true"
+          title="SPEC Media Group, Contact Form">
+        </iframe>
+      </div>
+
+      <!-- FALLBACK shown if HoneyBook URL not yet set -->
+      <div class="hb-fallback" id="hb-fallback">
+        <p>Our contact form is loading. If it doesn't appear,<br/>email us directly at <a href="mailto:hello@specmg.com" style="color:var(--gold);">hello@specmg.com</a></p>
+        <a href="mailto:hello@specmg.com" class="btn-gold">Send Us An Email</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK STRIP -->
 <div class="quick-strip">
   <div>
-    <h3>Prefer To Reach Out Directly?</h3>
-    <p>Call, text, or email — we respond to everything within 24 business hours.</p>
+    <h3>Prefer To Email Directly?</h3>
+    <p>We respond to everything within 24 business hours.</p>
   </div>
-  <div class="quick-contacts">
-    <a href="tel:2152007740" class="quick-contact-btn">📞 (215) 200-7740</a>
-    <a href="mailto:hello@specmg.com" class="quick-contact-btn">✉️ hello@specmg.com</a>
-    
+  <div>
+    <a href="mailto:hello@specmg.com" class="quick-btn">✉️ hello@specmg.com</a>
   </div>
 </div>
 
 <!-- FAQ -->
 <section class="faq-section">
-  <div style="max-width:1100px;margin:0 auto;">
-    <span style="display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;padding:6px 16px;margin-bottom:20px;border:1px solid var(--gold);color:var(--gold);">Common Questions</span>
-    <h2 style="font-family:'Anton',sans-serif;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:3px;text-transform:uppercase;color:var(--white);line-height:1;margin-bottom:16px;">Frequently Asked<br/>Questions</h2>
-    <p style="font-size:1rem;font-weight:300;color:var(--gray);margin-bottom:56px;">Everything you need to know before booking with SPEC Media Group.</p>
+  <div class="faq-inner">
+    <span class="section-label outline fade-up">Common Questions</span>
+    <h2 class="section-title fade-up d1">Frequently Asked<br/>Questions</h2>
     <div class="faq-grid">
-      <div class="faq-item">
+      <div class="faq-item fade-up">
         <h4>How do I book a shoot?</h4>
-        <p>Fill out the contact form above or call/text us directly. We'll confirm availability, send you a quote, and secure your date with a 50% non-refundable deposit.</p>
+        <p>Fill out the contact form above or email us directly. We'll confirm availability, send a quote through HoneyBook, and secure your date with a 50% non-refundable deposit.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item fade-up d1">
         <h4>How much is the deposit?</h4>
-        <p>A non-refundable 50% deposit is required to lock in your shoot date. The remaining balance is due before your final files are released.</p>
+        <p>A non-refundable 50% deposit is required to lock in your shoot date. The remaining balance is due before final files are released.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item fade-up">
         <h4>What areas do you serve?</h4>
-        <p>We serve the Greater Philadelphia Area including Delaware County, Chester County, Philadelphia, the Main Line, and surrounding areas. Travel fees may apply for shoots outside the region.</p>
+        <p>Greater Philadelphia Area, Delaware County, Chester County, Philadelphia, the Main Line, and surrounding areas. Travel fees may apply outside the region.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item fade-up d1">
         <h4>How long until I get my files?</h4>
-        <p>Photography: 3–5 business days. 30-second video: 5–7 business days. 60-second video: 7–10 business days. Rush options available on every service.</p>
+        <p>30-sec promo: 5–7 business days. 60-sec promo: 7–10 business days. Event coverage: 7–14 business days. Rush delivery available on every service.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item fade-up">
         <h4>What payment methods do you accept?</h4>
-        <p>We accept Zelle (preferred), PayPal Business, Venmo Business, and cash for local transactions. Invoices unpaid after 7 days are subject to a 1.5% weekly late fee.</p>
+        <p>Invoices are sent through HoneyBook. We accept Zelle (preferred), PayPal Business, Venmo Business, and cash for local transactions.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item fade-up d1">
         <h4>Can I reschedule my shoot?</h4>
-        <p>One reschedule is permitted with at least 24 hours notice. Cancellations or reschedule requests within 24 hours may result in forfeiture of your deposit.</p>
+        <p>One reschedule is permitted with at least 24 hours notice. Cancellations or requests within 24 hours may result in forfeiture of your deposit.</p>
       </div>
-      <div class="faq-item">
-        <h4>What do I need to prepare before the shoot?</h4>
-        <p>We'll cover everything in your pre-production consultation call. Generally: have your branding materials, logos, and any specific messaging ready. For real estate, ensure the property is clean and staged.</p>
+      <div class="faq-item fade-up">
+        <h4>Do you post to my accounts?</h4>
+        <p>Your accounts always remain yours. On a retainer, SPEC manages your pages and posting remotely on your behalf. If you prefer to keep posting in-house, we deliver the content and a clear posting plan instead.</p>
       </div>
-      <div class="faq-item">
-        <h4>Do you own the footage after delivery?</h4>
-        <p>Upon full payment you receive usage rights for business and promotional purposes. Raw unedited footage remains SPEC Media Group's property unless separately purchased ($150–$200 flat).</p>
-      </div>
-      <div class="faq-item">
-        <h4>How does the Content Management Add-On work?</h4>
-        <p>You provide platform access and deliver your content each month. We write the captions, apply hashtags, and schedule everything to post across Instagram, Facebook, and LinkedIn on your behalf.</p>
-      </div>
-      <div class="faq-item">
-        <h4>Can I use my content for paid ads?</h4>
-        <p>Yes — your usage rights cover business and promotional purposes including paid advertising. If you need specific ad formats or sizes, let us know at booking and we'll format accordingly.</p>
+      <div class="faq-item fade-up d1">
+        <h4>Who do I work with?</h4>
+        <p>You work directly with the SPEC Media Group team from the first conversation through final delivery. No account managers, no hand-offs.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICE AREA -->
-<div class="area-section">
-  <h3>Our Service Area</h3>
-  <p>Proudly serving businesses across the Greater Philadelphia Area and beyond.</p>
-  <div class="area-tags">
-    <span class="area-tag">Philadelphia, PA</span>
-    <span class="area-tag">Delaware County</span>
-    <span class="area-tag">Chester County</span>
-    <span class="area-tag">Montgomery County</span>
-    <span class="area-tag">The Main Line</span>
-    <span class="area-tag">Brookhaven, PA</span>
-    <span class="area-tag">Media, PA</span>
-    <span class="area-tag">West Chester, PA</span>
-    <span class="area-tag">Wilmington, DE</span>
-    <span class="area-tag">South Jersey</span>
-  </div>
-</div>
-
 <footer>
   <div class="footer-grid">
     <div>
       <a href="index.html" class="footer-logo"><span>SPEC</span> Media Group</a>
-      <p class="footer-tagline">Specialized Photography, Entertainment & Commercial. Professional creative production and digital marketing for businesses across the Greater Philadelphia Area.</p>
-      <p class="footer-location">Greater Philadelphia Area</p>
+      <p class="footer-tagline">Boutique creative production and content strategy for small businesses across the Greater Philadelphia Area.</p>
+      <p class="footer-location">Delaware &amp; Chester County, PA</p>
     </div>
     <div class="footer-col">
-      <h4>SPEC Media</h4>
+      <h4>Services</h4>
       <ul>
-        <li><a href="media-services.html">Media Services</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="services.html">Event Coverage</a></li>
+        <li><a href="services.html">Promo Short Film</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>SPEC Marketing</h4>
+      <h4>Retainers</h4>
       <ul>
-        <li><a href="marketing-services.html">Marketing Services</a></li>
-        <li><a href="packages.html">Packages & Pricing</a></li>
+        <li><a href="retainers.html">Monthly Retainer</a></li>
+        <li><a href="retainers.html">Quarterly Retainer</a></li>
       </ul>
     </div>
-    <div class="footer-col footer-contact">
+    <div class="footer-col">
       <h4>Get In Touch</h4>
-      <p>📞 <a href="tel:2152007740">(215) 200-7740</a></p>
       <p>✉️ <a href="mailto:hello@specmg.com">hello@specmg.com</a></p>
-      <p>🌐 specmg.com</p>
-      <p style="margin-top:16px;"></p>
+      <p>🌐 <a href="https://specmg.com">specmg.com</a></p>
     </div>
   </div>
   <div class="footer-bottom">
     <p>&copy; 2026 SPEC Media Group. All rights reserved.</p>
-    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></div>
   </div>
 </footer>
 
 <script>
-function nav(url) {
-  window.location.href = url;
-}
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Show fallback if HoneyBook iframe fails to load
+  const iframe = document.getElementById('hb-iframe');
+  const fallback = document.getElementById('hb-fallback');
+  if (iframe && iframe.src.includes('YOUR_HONEYBOOK')) {
+    iframe.style.display = 'none';
+    fallback.style.display = 'block';
+  }
 </script>
 </body>
 </html>
